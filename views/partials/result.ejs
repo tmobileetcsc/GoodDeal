@@ -1,0 +1,103 @@
+<% if ( typeof error !== 'undefined' ) { %>
+
+
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Error!</strong>
+        <p>
+            <%= error %>
+        </p>
+    </div>
+
+    <% }
+if ( typeof data !== 'undefined' ) { %>
+
+        <div class="row">
+
+            <div class="col-xs-12 col-md-4 mg-b-10">
+                <div class="data-container">
+                    <div class="data-icon">
+                        <span class="fa fa-home">
+                    </div>
+                    <div class="data-title text-right">Summary</div>
+                    <div class="data-value">
+                        <div class="data-value-label">City</div>
+                        <div class="data-value-content">
+                            <span class="upper"><%= data.lbcData.city.replace( /\_/g, '-' ) %></span>
+                        <span> (<%= data.lbcData.postalCode %>)</span>
+                    </div>
+                    <div class="data-value-label">Price</div>
+                    <div class="data-value-content">
+                        <span><%= data.lbcData.price %> €</span>
+                        <span> (<%= Math.round(data.lbcData.price/data.lbcData.surface) %> €/m<sup>2</sup>)</span>
+                    </div>
+                    <div class="data-value-label">Surface</div>
+                    <div class="data-value-content">
+                        <span><%= data.lbcData.surface %> m<sup>2</sup></span>
+                    </div>
+                    <div class="data-value-label">Type</div>
+                    <div class="data-value-content">
+                        <span class="first-upper"><%= data.lbcData.type %></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4 mg-b-10">
+            <div class="data-container pad-l-10 pad-r-10">
+                <div class="data-title text-center data-result text-xlarge">Is it a good deal?</div>
+                <div class="data-value">
+                    <div class="data-value-content text-center">
+                        <% if ( data.deal.good ) { %>
+                            <div class="mg-t-20 mg-b-20">
+                                <span class="fa fa-3x fa-smile-o text-success"></span>
+                            </div>
+                            <div class="pad-t-10">
+                                <span class="text-success text-xxlarge marker">YES</span>
+                            </div>
+                            <% } else { %>
+                                <div class="mg-t-20 mg-b-20">
+                                    <span class="fa fa-3x fa-frown-o text-danger"></span>
+                                </div>
+                                <div class="pad-t-10">
+                                    <span class="text-danger text-xxlarge marker">NO</span>
+                                </div>
+                                <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4 mg-b-10">
+            <div class="data-container">
+                <div class="data-icon">
+                    <span class="fa fa-bar-chart">
+                    </div>
+                    <div class="data-title text-right">Average prices</div>
+                    <div class="data-subtitle">
+                        <%= data.lbcData.city.replace( /\_/g, '-' ) %>
+                    </div>
+                    <div class="data-value">
+                        <div class="data-value-label">Price /m<sup>2</sup> (appartment)</div>
+                        <div class="data-value-content">
+                            <% if ( data.lbcData.type === 'appartement' ) { %>
+                                <span class="mg-r-10 fa fa-arrow-circle-right text-primary"></span>
+                    <% }%>
+                        <span><%= data.maData.priceAppart %> €</span>
+                </div>
+            </div>
+            <div class="data-value">
+                <div class="data-value-label">Price /m<sup>2</sup> (house)</div>
+                <div class="data-value-content">
+                    <% if ( data.lbcData.type !== 'appartement' ) { %>
+                        <span class="mg-r-10 fa fa-arrow-circle-right text-primary"></span>
+                        <% }%>
+                            <span><%= data.maData.priceHouse %> €</span>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        </div>
+
+        <% } %>
